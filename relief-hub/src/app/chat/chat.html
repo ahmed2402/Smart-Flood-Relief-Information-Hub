@@ -1,0 +1,32 @@
+<div class="chat-container">
+  <div class="chat-header">
+    <h1>Smart Flood Relief Information Hub</h1>
+  </div>
+  <div class="chat-messages" #messageContainer>
+    <div *ngFor="let message of messages" class="message-wrapper" [ngClass]="{'user-message-wrapper': message.isUser}">
+      <div [ngClass]="{'user-message': message.isUser, 'bot-message': !message.isUser}" [@messageAnimation]>
+        <ng-container *ngIf="message.isUser; else botMsg">
+          <p>{{ message.text }}</p>
+        </ng-container>
+        <ng-template #botMsg>
+          <p [innerHTML]="formatBotMessage(message.text)"></p>
+        </ng-template>
+      </div>
+    </div>
+    <div *ngIf="loading" class="loading-indicator" [@loadingAnimation]>
+      <div class="spinner"></div>
+      <span>Thinking...</span>
+    </div>
+  </div>
+  <div class="chat-input-area">
+    <input
+      type="text"
+      [(ngModel)]="currentQuestion"
+      (keyup.enter)="sendMessage()"
+      placeholder="Ask about shelters, services, or flood updates..."
+      [disabled]="loading"
+    />
+    <button (click)="sendMessage()" [disabled]="!currentQuestion.trim() || loading">
+      <i class="fas fa-paper-plane"></i> Send
+    </button>
+  </div>

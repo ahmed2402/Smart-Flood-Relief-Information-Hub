@@ -1,0 +1,260 @@
+@font-face {
+  font-family: "Nandos Hand";
+  src: url("/Nandos-Hand.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  src: url("/NotoSans-Medium.ttf") format("truetype");
+}
+
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #1a1a1a; /* Dark background */
+  font-family: 'Arial', sans-serif;
+  color: #e0e0e0; /* Light text for contrast */
+  background: radial-gradient(circle at 60% 40%, #263238 0%, #1a1a1a 80%);
+/* background-image: url("data:image/svg+xml;utf8,<svg width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><ellipse cx='50%' cy='50%' rx='300' ry='80' fill='none' stroke='%2300bcd4' stroke-width='2' opacity='0.08'/><ellipse cx='50%' cy='50%' rx='200' ry='60' fill='none' stroke='%2300bcd4' stroke-width='2' opacity='0.06'/><ellipse cx='50%' cy='50%' rx='100' ry='30' fill='none' stroke='%2300bcd4' stroke-width='2' opacity='0.04'/></svg>"); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.chat-container {
+  font-family: "Noto Sans";
+  width: 100%;
+  max-width: 700px; /* Slightly wider chat container */
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #2b2b2b; /* Slightly lighter dark for container */
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+  overflow: hidden;
+  animation: fadeIn 0.5s ease-out forwards; /* Container fade in animation */
+}
+
+.chat-header {
+  background-color: #3a3a3a; /* Darker header */
+  color: #00bcd4; /* Accent color for header text (cyan) */
+  padding: 18px 25px;
+  text-align: center;
+  font-family: "Nandos Hand";
+  font-size: 1.4em; /* Larger font */
+  font-weight: bold;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid #4a4a4a;
+}
+
+.chat-messages {
+  font-family: "Noto Sans";
+  flex-grow: 1;
+  padding: 20px 25px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: #222222; /* Even darker for message area */
+}
+
+/* Scrollbar styling for dark theme */
+.chat-messages::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: #2b2b2b;
+  border-radius: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: #555555;
+  border-radius: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+  background: #777777;
+}
+
+.message-wrapper {
+  display: flex;
+}
+
+.user-message-wrapper {
+  justify-content: flex-end;
+}
+
+.user-message, .bot-message {
+  max-width: 75%;
+  padding: 12px 18px;
+  border-radius: 20px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  animation: slideInFromBottom 0.4s ease-out forwards; /* Adjusted animation duration */
+}
+
+.user-message {
+  background-color: #007bff; /* Blue for user messages */
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 5px;
+}
+
+.bot-message {
+  background-color: #3a3a3a; /* Dark grey for bot messages */
+  color: #e0e0e0;
+  align-self: flex-start;
+  border-bottom-left-radius: 5px;
+}
+
+.context {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #333333; /* Slightly lighter dark for context */
+  border-left: 4px solid #00bcd4; /* Accent border */
+  border-radius: 5px;
+  font-size: 0.88em;
+  color: #cccccc;
+}
+
+.context strong {
+  color: #00bcd4; /* Accent color for strong text */
+}
+
+.context ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin-top: 5px;
+}
+
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 15px;
+  color: #cccccc;
+  font-style: italic;
+  animation: fadeIn 0.3s ease-in forwards;
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.2); /* Lighter border for spinner */
+  border-top: 4px solid #00bcd4; /* Accent color for spinner */
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  animation: spin 1s linear infinite;
+  margin-right: 12px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.chat-input-area {
+  font-family: "Noto Sans";
+  display: flex;
+  padding: 15px 25px;
+  border-top: 1px solid #4a4a4a;
+  background-color: #333333;
+}
+
+.chat-input-area input {
+  flex-grow: 1;
+  padding: 12px 18px;
+  border: 1px solid #555555;
+  border-radius: 25px;
+  margin-right: 10px;
+  font-size: 1em;
+  outline: none;
+  background-color: #2b2b2b;
+  color: #e0e0e0;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chat-input-area input::placeholder {
+  color: #aaaaaa;
+}
+
+.chat-input-area input:focus {
+  border-color: #00bcd4;
+  box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.3);
+}
+
+.chat-input-area button {
+  background-color: #00bcd4; /* Accent color for button */
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 22px;
+  cursor: pointer;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.chat-input-area button:hover:not(:disabled) {
+  background-color: #0097a7; /* Darker accent on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 188, 212, 0.3);
+}
+
+.chat-input-area button:disabled {
+  background-color: #4f6b70; /* Muted accent when disabled */
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.chat-input-area button i {
+  margin-right: 8px; /* Slightly more space for icon */
+}
+
+/* Keyframe animations */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes slideInFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Subtle bounce for new messages */
+@keyframes bounceIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  60% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+/* Apply bounce to message wrapper after initial slide-in */
+.message-wrapper {
+  animation: slideInFromBottom 0.4s ease-out forwards;
+}
+
+/* Optional: add a slight ripple/pulse effect on button click */
+.chat-input-area button:active {
+  transform: translateY(0);
+  box-shadow: 0 0 0 0 rgba(0, 188, 212, 0);
+  animation: pulse 0.3s ease-out forwards;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(0, 188, 212, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(0, 188, 212, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 188, 212, 0); }
+}
